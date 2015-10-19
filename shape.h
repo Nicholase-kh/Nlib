@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <math.h>
+#include <vector>
 
 using rectangle = SDL_Rect;
 using point = SDL_Point;
@@ -19,6 +20,7 @@ struct line {
 struct circle {
 	point c;
 	int r;
+	std::vector<rectangle>& shape(int pixel = 10);
 };
 
 int distance(const point& m, const point& n);
