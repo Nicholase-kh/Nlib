@@ -35,3 +35,26 @@ std::vector<rectangle>& circle::shape(int pixel)
 	return shape;
 }
 
+int distance(const point& m, const point& n)
+{
+	return sqrt(pow(m.x - n.x, 2) + pow(m.y - n.y, 2));
+}
+
+point& operator+=(point& p, const vec& v)
+{
+	point poi;
+	return poi = p + v;
+}
+
+point operator+(const point& p, const vec& v)
+{
+	point poi;
+	poi = p.x + v.dx;
+	poi = p.y + v.dy;
+	return poi;
+}
+
+int operator*(const vec& a, const vec& b)
+{
+	return a.dx * b.dx + a.dy * b.dy;
+}
