@@ -1,0 +1,21 @@
+v = v1 + v2
+v1 = (v * n) * n / n^2
+v2~ = v2
+    = v - v1
+    = v - (v * n) * n / n^2
+v1~ = k * v1
+    = k * (v * n) * n / n^2
+v~ = v1~ + v2~
+   = k * (v * n) * n / n^2  +  v - (v * n) * n / n^2
+   = v + (k - 1) * (v * n) * n / n^2
+
+x = (1 0)
+x~ = x + (k - 1) * (x * n) * n / n^2
+   = x + (k - 1) * nx * n / n^2
+   = [1 + (k - 1) * nx^2 / n^2 , (k - 1) * nx * ny / n^2]
+y = (0 1)
+y~ = [(k - 1) * nx * ny / n^2 , 1 + (k - 1) * ny^2 / n^2]
+
+S(n, k) = [x] = [1 + (k - 1) * nx^2 / n^2 , (k - 1) * nx * ny / n^2]
+          [y]   [(k - 1) * nx * ny / n^2 , 1 + (k - 1) * ny^2 / n^2]
+参考资料：http://www.cnblogs.com/ylwn817/archive/2011/10/23/2221660.html
