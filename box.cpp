@@ -70,6 +70,12 @@ void box::acc(const vec& a)
 	_v += a;
 }
 
+void reflect(const vec& l)
+{
+	matrix mirr(l, -1); //matrix mirror
+	this->_v = mirr * this->_v;
+}
+
 bool box::InBox(const point& p)
 {
 	if (!_box.empty())
@@ -94,6 +100,43 @@ std::vector<rectangle>&& box::Box() const
 	return std::move(box);
 }
 
+box&& reflect(box dot, const line& l)
+{
+	dot = dot.reflect(l);
+	return std::move(dot);
+}
 
-
-
+bool overlap(const std::vector<rectangle>& boxA, const std::vector<rectangle>& boxB)
+{
+	if (!(boxA[0].x > boxB[0].x+boxB[0].w ||
+		  boxB[0].x > boxA[0].x+boxA[0].w || 
+		  boxA[0].y > boxB[0].y+boxB[0].h ||
+		  boxB[0].y > boxA[0].y+boxA[0].h ))
+	{
+		int leftA, rightA, topA, bottomA;
+		int letfB, rightB, topB, bottomB;
+		int i, j;
+		for (i = 1; i != boxA.size(); ++i)
+		{
+			leftA = boxA[i].x;
+			rightA = leftA + boxA[i].w;
+			topA = boxA.y;
+			bottomA = topA[i] + boxA[i].h;
+			for (j = 1; j != boxB.size(); ++j)
+			{
+				leftB = boxB[j].x;
+				rightB = leftB + boxB[j].w;
+				topB = boxB[j].y;
+				bottomB = topB + boxB[j].h;
+				if (!(leftA > rightB ||
+					  leftB > rightA ||
+					  topA > bottomB ||
+					  topB > bottomA ))
+				{
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}

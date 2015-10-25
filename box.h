@@ -18,6 +18,7 @@ public:
 	void move();
 	void moveT(const vec& t); //move by touch
 	void acc(const vec& a); //accelerate
+	void reflect(const vec& l);
 	bool InBox(const point& p);
 	std::vector<rectangle>&& Box() const;
 private:
@@ -27,7 +28,9 @@ private:
 	vec _v = 0;
 };
 
-box mirror(const box& dot, const line& l);
+box&& reflect(box dot, const vec& n);
+//TODO: add a unit about mirror
 
 bool overlap(const std::vector<rectangle>& boxA, const std::vector<rectangle>& boxB);
+
 #endif
